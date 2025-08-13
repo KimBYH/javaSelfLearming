@@ -2,7 +2,12 @@
 
 <!-- content -->
 <div class="bg-dark text-white p-5">
+    {{#username}}
     <h1>{{username}}님 환영합니다.~</h1>
+    {{/username}}
+    {{^username}}
+        <h1>손님, 환영합니다.</h1>
+    {{/username}}
 </div>
 
 {{>layouts/footer}}
