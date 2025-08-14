@@ -6,9 +6,12 @@ import com.example.javaSelfLearming.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
 
 @Slf4j
 @Controller
@@ -17,6 +20,13 @@ public class memberController {
 
     @Autowired
     private MemberRepository memberRepository;
+    
+    @GetMapping("")
+    public String membersIndex(Model model){
+        ArrayList<Member> membersList = memberRepository.findAll();
+        model.addAttribute("membersList", membersList);
+        return "members/index";
+    }
 
     @GetMapping("/new")
     public String newMemberForm(){
