@@ -46,8 +46,20 @@ public class articleController {
         return "articles/show";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model){
+        Article articleEntity = articleRepository.findById(id).orElseThrow( ()-> null);
+
+        model.addAttribute("article", articleEntity);
+
+        log.info(articleEntity.toString());
+
+        return "articles/edit";
+    }
+
     //Post Mapping
 
+    // 게시글 생성
     @PostMapping("/create")
     public String createArticle(ArticleForm form){
         log.info(form.toString());
@@ -59,5 +71,20 @@ public class articleController {
         log.info(saved.toString());
 
         return "redirect:/articles/" + saved.getId();
+    }
+
+    //게시글 업데이트
+    @PostMapping("/update")
+    public String updateArticle(ArticleForm form){
+
+        Article ArticleEntity = form.toEntity();
+
+        Article target = articleRepository.findById(ArticleEntity.getId()).orElseThrow(()-> null);
+
+        if(target != null){
+            articleRepository.save(ArticleEntity);
+        }
+
+        return "redirect:/articles/" + ArticleEntity.getId();
     }
 }
