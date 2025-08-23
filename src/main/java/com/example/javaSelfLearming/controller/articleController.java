@@ -21,6 +21,8 @@ public class articleController {
     @Autowired // 스프링에서 해당 객체를 주입시켜줌 (의존성 주입 DI : Dependency Injection)
     private ArticleRepository articleRepository;
 
+    //GetMapping
+
     @GetMapping("")
     public String index(Model model){
         ArrayList<Article> articlesEntityList = articleRepository.findAll();
@@ -37,12 +39,14 @@ public class articleController {
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
 
-        Article articleEntity = articleRepository.findById(id).orElse(null);
+        Article articleEntity = articleRepository.findById(id).orElseThrow( ()-> null);
 
         model.addAttribute("article", articleEntity);
 
         return "articles/show";
     }
+
+    //Post Mapping
 
     @PostMapping("/create")
     public String createArticle(ArticleForm form){
