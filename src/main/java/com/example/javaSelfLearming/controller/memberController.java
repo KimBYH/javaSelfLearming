@@ -54,7 +54,7 @@ public class memberController {
         Member saved = memberRepository.save(member);
         log.info(saved.toString());
 
-        return "greetings";
+        return "redirect:/members/" + saved.getId();
     }
 
 }
