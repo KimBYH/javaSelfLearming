@@ -12,12 +12,14 @@
     {{#articlesList}}
         <tr>
             <td>{{id}}</td>
-            <td>{{title}}</td>
+            <td><a href="/articles/{{id}}">{{title}}</a></td>
             <td>{{content}}</td>
         </tr>
     {{/articlesList}}
 
     </tbody>
 </table>
+
+<button type="button" class="btn btn-primary" onclick="location.href='/articles/new'">New Article</button>
 
 {{>layouts/footer}}
