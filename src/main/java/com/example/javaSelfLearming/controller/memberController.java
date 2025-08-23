@@ -44,6 +44,16 @@ public class memberController {
         return "members/show";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model){
+
+        Member member = memberRepository.findById(id).orElseThrow(()->null);
+
+        model.addAttribute("member", member);
+
+        return "members/edit";
+    }
+
     @PostMapping("/create")
     public String joinMember(MemberForm form){
         log.info(form.toString());
@@ -55,6 +65,21 @@ public class memberController {
         log.info(saved.toString());
 
         return "redirect:/members/" + saved.getId();
+    }
+
+    @PostMapping("/update")
+    public String updateMember(MemberForm form){
+        log.info(form.toString());
+
+        Member memberEntity = form.toEntity();
+
+        Member target = memberRepository.findById(memberEntity.getId()).orElseThrow(()-> null);
+
+        if (target != null) {
+            memberRepository.save(memberEntity);
+        }
+
+        return "redirect:/members/" + memberEntity.getId();
     }
 
 }
