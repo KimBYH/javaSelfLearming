@@ -23,7 +23,7 @@ public class ArticleService {
     }
 
     public Article show(Long id) {
-        return articleRepository.findById(id).orElseThrow(()->null);
+        return articleRepository.findById(id).orElse(null);
     }
 
     public Article save(ArticleForm form) {
