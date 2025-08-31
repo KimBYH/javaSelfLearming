@@ -27,6 +27,13 @@ insert into comment(article_id, nickname, body) values(6, 'Park', '조깅');
 insert into comment(article_id, nickname, body) values(6, 'Kim', '유튜브 시청');
 insert into comment(article_id, nickname, body) values(6, 'Choi', '독서');
 
+insert into pizza(name, price) values ('콤비네이션피자', 25900);
+insert into pizza(name, price) values ('페퍼로니 피자', 23900);
+insert into pizza(name, price) values ('쉬림프 피자', 34900);
+insert into pizza(name, price) values ('고구마 피자', 30900);
+insert into pizza(name, price) values ('치즈 피자', 22900);
+
+
 
 
 
