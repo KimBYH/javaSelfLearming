@@ -94,4 +94,82 @@ class ArticleServiceTest {
 
     }
 
+    @Transactional
+    @Test
+    void update_성공_존재하는_id와_title과_content가_있는_dto_입력() {
+        // 예상 데이터
+        Long id = 3L;
+        String title = "가가가";
+        String content = "1111";
+
+        ArticleForm form = new ArticleForm(id, title, content);
+
+        Article expected = articleService.update(3L, new ArticleForm(3L, "가가가", "1111"));
+
+        //실제 데이터
+        Article article = articleService.update(id, form);
+
+        //비교와 검증
+        assertEquals(article.toString(),expected.toString());
+    }
+
+    @Transactional
+    @Test
+    void update_성공_존재하는_id와_title만_있는_dto_입력() {
+        // 예상 데이터
+        Long id = 3L;
+        String title = "가가가";
+
+        ArticleForm form = new ArticleForm(id, title, null);
+
+        Article expected = articleService.update(3L, new ArticleForm(3L, "가가가", null));
+
+        //실제 데이터
+        Article article = articleService.update(id, form);
+
+        //비교와 검증
+        assertEquals(article.toString(),expected.toString());
+    }
+
+    @Test
+    void update_실패_존재하지_않는_id의_dto_입력(){
+        Long id = 4L;
+        String title = "가가가";
+        String content = "1111";
+
+        ArticleForm form = new ArticleForm(3L, title, content);
+
+        Article expected = null;
+
+        //실제 데이터
+        Article article = articleService.update(id, form);
+
+        //비교와 검증
+        assertEquals(article, expected);
+    }
+
+    @Transactional
+    @Test
+    void delete_성공_존재하는_id값_입력(){
+        Long id = 3L;
+        String title = "다다다";
+        String content = "3333";
+
+        Article expected = new Article(id, title, content);
+
+        Article article = articleService.delete(id);
+
+        assertEquals(expected, article);
+    }
+
+    @Test
+    void delete_실패_존재하지않는_id값_입력(){
+        Long id = -1L;
+
+        Article expected = null;
+
+        Article article = articleService.delete(id);
+
+        assertEquals(expected, article);
+    }
 }
