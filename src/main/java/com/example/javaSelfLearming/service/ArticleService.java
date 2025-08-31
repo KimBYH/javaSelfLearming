@@ -39,7 +39,7 @@ public class ArticleService {
 
         log.info("id : {}, article : {}", id, article);
 
-        Article target = articleRepository.findById(id).orElseThrow(()->null);
+        Article target = articleRepository.findById(id).orElse(null);
 
         if(target == null || id != article.getId()) {
             log.info("id : {}, article : {}]", id, article);
@@ -51,7 +51,7 @@ public class ArticleService {
     }
 
     public Article delete(Long id) {
-        Article target = articleRepository.findById(id).orElseThrow(()->null);
+        Article target = articleRepository.findById(id).orElse(null);
 
         if (target == null) {
             return null;
