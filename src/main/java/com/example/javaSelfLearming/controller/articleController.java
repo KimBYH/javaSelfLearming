@@ -1,8 +1,10 @@
 package com.example.javaSelfLearming.controller;
 
 import com.example.javaSelfLearming.dto.ArticleForm;
+import com.example.javaSelfLearming.dto.CommentDto;
 import com.example.javaSelfLearming.entity.Article;
 import com.example.javaSelfLearming.repository.ArticleRepository;
+import com.example.javaSelfLearming.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -22,6 +25,9 @@ public class articleController {
 
     @Autowired // 스프링에서 해당 객체를 주입시켜줌 (의존성 주입 DI : Dependency Injection)
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private CommentService commentService;
 
     //GetMapping
 
@@ -41,9 +47,11 @@ public class articleController {
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
 
-        Article articleEntity = articleRepository.findById(id).orElseThrow( ()-> null);
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentsDtos = commentService.getComments(id);
 
         model.addAttribute("article", articleEntity);
+        model.addAttribute("commentsDtos", commentsDtos);
 
         return "articles/show";
     }
