@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+    <h1>헬로</h1>
+    <ul>
+        <li class="prerequisite">HTML</li>
+        <li class="prerequisite">CSS</li>
+        <li class="prerequisite">JavaScript</li>
+        <li class="prerequisite">Java</li>
+        <li>SQL</li>
+        <li>Spring Boot</li>
+    </ul>
+<script>
+    const selectAll = document.querySelectorAll(".prerequisite");
+
+    selectAll.forEach((pre) => {
+        pre.style.textDecoration = "line-through";
+    });
+</script>
+
+</body>
+</html>
